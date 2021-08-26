@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ABB Mittagessen</string>
+    <string name="lunch">Mittagessen:</string>
+    <string name="vegetarianLunch">Vegetarisch:</string>
+    <string name="dessert">Dessert:</string>
+    <string name="weekday">Wochentag</string>
+    <string name="date">dd.mm.yyyy</string>
+    <string name="actualLunch">Tatsächliches Mittagessen</string>
+    <string name="actualVegetarianLunch">Tatsächliches vegetarisches Mittagessen</string>
+    <string name="actualDessert">Tatsächliches Dessert</string>
+    <string name="weeks">dd.mm - dd.mm.yyyy\ndd.mm - dd.mm.yyyy</string>
+</resources>
