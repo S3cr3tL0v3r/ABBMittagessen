@@ -1,7 +1,6 @@
 package de.henrikkaltenbach.abbmittagessen;
 
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -9,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -27,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private int dayOfWeek;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,20 +35,26 @@ public class MainActivity extends AppCompatActivity {
         tvVegetarianLunch = findViewById(R.id.tvVegetarianLunch);
         tvDessert = findViewById(R.id.tvDessert);
         progressBar = findViewById(R.id.progressBar);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         getDate();
-        scrape();
+        scrapeLunch();
     }
 
     private void getDate() {
         Calendar calendar = Calendar.getInstance();
         Date today = calendar.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
         tvWeekday.setText(calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.GERMANY));
         tvDate.setText(sdf.format(today));
     }
 
-    private void scrape() {
+    private void scrapeLunch() {
+        progressBar.setVisibility(View.VISIBLE);
         new Thread(() -> {
             Document document = null;
             try {
@@ -73,16 +76,16 @@ public class MainActivity extends AppCompatActivity {
                     textView.setText(weeks[0] + "\n" + weeks[1]);
                 });*/
 
-                Element meal = document.getElementById("Content_C1079_Col0" + (dayOfWeek - 2));
-                //Element meal = document.getElementById("Content_C1139_Col0" + (dayOfWeek - 2));
+                Element meal = document.getElementById("Content_C1079_Col0" + dayOfWeek);
+                //Element meal = document.getElementById("Content_C1139_Col0" + dayOfWeek);
                 if (meal != null) {
                     tvLunch.post(() -> {
                         tvLunch.setText(meal.text());
                     });
                 }
 
-                Element vegetarianLunch = document.getElementById("Content_C1080_Col0" + (dayOfWeek - 2));
-                //Element vegetarianLunch = document.getElementById("Content_C1140_Col0" + (dayOfWeek - 2));
+                Element vegetarianLunch = document.getElementById("Content_C1080_Col0" + dayOfWeek);
+                //Element vegetarianLunch = document.getElementById("Content_C1140_Col0" + dayOfWeek);
                 if (vegetarianLunch != null) {
                     final String vegetarian = vegetarianLunch.text().substring(13);
                     tvVegetarianLunch.post(() -> {
@@ -90,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
 
-                Element dessertElement = document.getElementById("Content_C1081_Col0" + (dayOfWeek - 2));
-                //Element dessertElement = document.getElementById("Content_C1141_Col0" + (dayOfWeek - 2));
+                Element dessertElement = document.getElementById("Content_C1081_Col0" + dayOfWeek);
+                //Element dessertElement = document.getElementById("Content_C1141_Col0" + dayOfWeek);
                 if (dessertElement != null) {
                     final String dessert = dessertElement.text().substring(8);
                     tvDessert.post(() -> {

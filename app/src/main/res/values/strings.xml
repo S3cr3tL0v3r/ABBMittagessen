@@ -9,4 +9,5 @@
     <string name="actualVegetarianLunch">Tatsächliches vegetarisches Mittagessen</string>
     <string name="actualDessert">Tatsächliches Dessert</string>
     <string name="weeks">dd.mm - dd.mm.yyyy\ndd.mm - dd.mm.yyyy</string>
+    <string name="app_icon">App icon</string>
 </resources>

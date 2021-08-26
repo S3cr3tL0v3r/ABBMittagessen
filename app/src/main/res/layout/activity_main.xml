@@ -7,28 +7,54 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tvWeekday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/weekday"
-        android:textSize="36sp"
-        android:textStyle="bold"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:titleTextColor="@android:color/white"
+        android:background="?attr/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="@string/date"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvWeekday"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/appIcon"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_icon"
+                android:scaleX="1.75"
+                android:scaleY="1.75"
+                android:src="@mipmap/ic_launcher_foreground"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tvWeekday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/weekday"
+                android:textColor="@color/colorAccent"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvDate"
+                app:layout_constraintStart_toEndOf="@+id/appIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/date"
+                android:textColor="@color/colorAccent"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tvWeekday"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -38,21 +64,19 @@
         android:indeterminateTint="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="@+id/scrollView"
         app:layout_constraintBottom_toBottomOf="@+id/scrollView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/scrollView"
+        app:layout_constraintEnd_toEndOf="@+id/scrollView" />
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWeekday">
-
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/tvLunchHeadline"
                 android:layout_width="wrap_content"
@@ -62,7 +86,6 @@
                 android:text="@string/lunch"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/tvLunch"
                 android:layout_width="wrap_content"
@@ -72,7 +95,6 @@
                 android:layout_marginEnd="32dp"
                 android:text=""
                 android:textSize="24sp" />
-
             <TextView
                 android:id="@+id/tvVegetarianLunchHeadline"
                 android:layout_width="wrap_content"
@@ -82,7 +104,6 @@
                 android:text="@string/vegetarianLunch"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/tvVegetarianLunch"
                 android:layout_width="wrap_content"
@@ -92,7 +113,6 @@
                 android:layout_marginEnd="32dp"
                 android:text=""
                 android:textSize="24sp" />
-
             <TextView
                 android:id="@+id/tvDessertHeadline"
                 android:layout_width="wrap_content"
@@ -102,7 +122,6 @@
                 android:text="@string/dessert"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/tvDessert"
                 android:layout_width="wrap_content"
@@ -111,9 +130,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:text=""
-                android:textAlignment="viewStart"
                 android:textSize="24sp" />
-
             <TextView
                 android:id="@+id/textview"
                 android:layout_width="wrap_content"
@@ -122,11 +139,8 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 android:text=""
-                android:textAlignment="viewStart"
-                android:textSize="18sp" />
-
+                android:textSize="24sp" />
         </LinearLayout>
-
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
